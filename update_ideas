@@ -1,4 +1,35 @@
 The code follows an MVP format and simply presents the simplest solution that answers the question or solves the problem.  There are a number of things you can do to the code to either make it more succinct, 
 or provide more functionality.  Here are a few examples:
 
-1. Not repeating
+1. Not repeating code
+
+The block:
+
+health_zero = [character.health for character in (ally + enemy)]
+    toughness_zero = [character.toughness for character in (ally + enemy)]
+    print(colours.BLACK + f"All Health: {health_zero}")
+    print(colours.BLACK + f"All Toughness: {toughness_zero}")
+    if 0.0 in health_zero:
+        print("Someone has died!")
+        print("Game Over!")
+        break
+        
+Can be turned into a function:
+
+def battle_stats(characters):
+    health_zero = [character.health for character in characters]
+    toughness_zero = [character.toughness for character in characters]
+    print(bcolors.BLACK + f"All Health: {health_zero}")
+    print(bcolors.BLACK + f"All Toughness: {toughness_zero}")
+    if 0.0 in health_zero:
+        print("Someone died!")
+        return True
+    return False
+    
+And then:
+
+if battle_stats(ally + enemy):
+        break
+
+can be used to check if True or False.
+
